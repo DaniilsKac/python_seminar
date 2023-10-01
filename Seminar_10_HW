@@ -1,0 +1,104 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "authorship_tag": "ABX9TyOzkgKFNuWWtTHyfHl3mj3j",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/DaniilsKac/python_seminar/blob/main/Seminar_10_HW\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": 1,
+      "metadata": {
+        "id": "cedKmKqDUTt7"
+      },
+      "outputs": [],
+      "source": [
+        "import pandas as pd"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "import random\n",
+        "lst = ['robot'] * 10\n",
+        "lst += ['human'] * 10\n",
+        "random.shuffle(lst)\n",
+        "data = pd.DataFrame({'whoAmI':lst})\n",
+        "data.head()\n",
+        "data['tmp'] = 1\n",
+        "data.set_index([data.index, 'whoAmI'], inplace=True)\n",
+        "data = data.unstack(level=-1, fill_value = 0).astype(int)\n",
+        "data.columns = data.columns.droplevel()\n",
+        "data.columns.name = None\n",
+        "print(data)\n"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "PIhD92VGUj-S",
+        "outputId": "cd4f28ac-451f-4d9c-a0b0-9656fc3f4648"
+      },
+      "execution_count": 9,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "    human  robot\n",
+            "0       1      0\n",
+            "1       1      0\n",
+            "2       0      1\n",
+            "3       0      1\n",
+            "4       0      1\n",
+            "5       1      0\n",
+            "6       1      0\n",
+            "7       0      1\n",
+            "8       0      1\n",
+            "9       0      1\n",
+            "10      0      1\n",
+            "11      1      0\n",
+            "12      1      0\n",
+            "13      1      0\n",
+            "14      0      1\n",
+            "15      1      0\n",
+            "16      1      0\n",
+            "17      1      0\n",
+            "18      0      1\n",
+            "19      0      1\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [],
+      "metadata": {
+        "id": "uJ9LuM9OUv5Y"
+      },
+      "execution_count": 7,
+      "outputs": []
+    }
+  ]
+}
